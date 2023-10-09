@@ -11,10 +11,12 @@ usage:
       steps:
         - checkout
         - cloudsmith-oidc/authenticate_with_oidc:
+            organisation: "your-organisation-id"
             service_account: "your-service-account-id"
         - run: |
-            echo "First ten characters of the token: ${CLOUDSMITH_OIDC_TOKEN:0:10}"
-            echo "Service Account: $CLOUDSMITH_SERVICE_ACCOUNT"
+            echo "Cloudsmith Organisation: $CLOUDSMITH_ORGANISATION"
+            echo "Cloudsmith Service Account: $CLOUDSMITH_SERVICE_ACCOUNT"
+            echo "Cloudsmith OIDC token (first ten characters): ${CLOUDSMITH_OIDC_TOKEN:0:10}"
   workflows:
     main:
       jobs:

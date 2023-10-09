@@ -3,6 +3,9 @@ description:
   OIDC token for use in subsequent requests to cloudsmith. The token is valid for up to 2 hours. On completion the
   environment variables CLOUDSMITH_SERVICE_ACCOUNT and CLOUDSMITH_OIDC_TOKEN are set.
 parameters:
+  organisation:
+    description: The identity/slug of the Cloudsmith organisation to use when authenticating
+    type: string
   service_account:
     description: The identity/slug of the Cloudsmith service account to use when authenticating
     type: string
@@ -10,10 +13,7 @@ steps:
   - run:
       name: Cloudsmith - Configure organisation and service account
       command: |
-        if [ -z "$CLOUDSMITH_ORGANISATION" ]
-        then
-          echo "export CLOUDSMITH_ORGANISATION=\"financial-times\"" >> "$BASH_ENV"
-        fi
+        echo "export CLOUDSMITH_ORGANISATION=\"<<parameters.organisation>>\"" >> "$BASH_ENV"
         echo "export CLOUDSMITH_SERVICE_ACCOUNT=\"<<parameters.service_account>>\"" >> "$BASH_ENV"
   - run:
       name: Cloudsmith - Authenticate with OIDC

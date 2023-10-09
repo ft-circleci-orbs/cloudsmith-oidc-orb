@@ -39,6 +39,7 @@ else
 
   echo "The following environment variables have been exported. The OIDC token has been masked below."
   echo ""
+  echo "CLOUDSMITH_ORGANISATON=$CLOUDSMITH_ORGANISATION"
   echo "CLOUDSMITH_SERVICE_ACCOUNT=$CLOUDSMITH_SERVICE_ACCOUNT"
   echo "CLOUDSMITH_OIDC_TOKEN=********"
 fi
