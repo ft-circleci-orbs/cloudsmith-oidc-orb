@@ -30,6 +30,7 @@ jobs:
     steps:
       - checkout
       - cloudsmith-oidc/authenticate_with_oidc:
+          organisation: "financial-times"
           service_account: "circleci-orb-testing"
       - run:
           name: Assert environment variables have been set
