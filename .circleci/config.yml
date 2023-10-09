@@ -21,9 +21,21 @@ workflows:
       - shellcheck/check:
           filters: *filters
       # Triggers the next workflow in the Orb Development Kit.
+      - orb-tools/publish:
+          orb_name: ft-circleci-orbs/cloudsmith-oidc
+          vcs_type: << pipeline.project.type >>
+          requires:
+            - orb-tools/lint
+            - orb-tools/review
+            - orb-tools/pack
+            - shellcheck/check
+          # Use a context to hold your publishing token.
+          context: circleci-orb-publishing
+          filters: *filters
+      # Triggers the next workflow in the Orb Development Kit.
       - orb-tools/continue:
           pipeline_number: << pipeline.number >>
           vcs_type: << pipeline.project.type >>
           orb_name: cloudsmith-oidc
-          requires: [orb-tools/lint, orb-tools/pack, orb-tools/review, shellcheck/check]
+          requires: [orb-tools/publish]
           filters: *filters
