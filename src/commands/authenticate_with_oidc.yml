@@ -9,7 +9,7 @@ parameters:
     default: "CLOUDSMITH_ORGANISATION"
   service_account:
     description: The name of environment variable containing the identity/slug of the Cloudsmith service account to use when authenticating
-    type: evn_var_name
+    type: env_var_name
     default: "CLOUDSMITH_SERVICE_ACCOUNT"
 steps:
   - run:
