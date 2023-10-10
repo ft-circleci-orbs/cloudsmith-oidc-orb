@@ -26,7 +26,7 @@ jobs:
       - run: |
           echo "export CLOUDSMITH_ORGANISATION=\"financial-times\"" >> "$BASH_ENV"
           echo "export CLOUDSMITH_SERVICE_ACCOUNT=\"circleci-orb-testing\"" >> "$BASH_ENV"
-      - cloudsmith-oidc/authenticate_with_oidc:
+      - cloudsmith-oidc/authenticate_with_oidc
       - run:
           name: Assert environment variables have been set
           command: | 
