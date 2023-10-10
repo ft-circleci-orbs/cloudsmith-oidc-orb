@@ -1,8 +1,7 @@
 version: 2.1
 
 description: >
-  Authenticate with Cloudsmith using OpenID Connect (OIDC).
-  This is intended to be used by other Cloudsmith orbs.
+  Authenticate with Cloudsmith using OpenID Connect (OIDC) to generate an OIDC token.
 
 display:
   home_url: "https://github.com/ft-circleci-orbs/cloudsmith-oidc-orb"
