@@ -1,26 +1,27 @@
 #!/bin/bash
 
-# shellcheck disable=SC2296
-
 set +e
 
-if [ -z "${<<parameters.organisation>>}" ]
+organisation=$(eval echo "\$$CLOUDSMITH_ORGANISATION_ENV_VAR")
+service_account=$(eval echo "\$$CLOUDSMITH_SERVICE_ACCOUNT_ENV_VAR")
+
+if [ -z "$organisation" ]
 then
   echo "Unable to generate OIDC token. Environment variable CLOUDSMITH_ORGANISATION is not set."
   exit 1
 fi
 
-if [ -z "${<<parameters.service_account>>}" ]
+if [ -z "$service_account" ]
 then
   echo "Unable to generate OIDC token. Environment variable CLOUDSMITH_SERVICE_ACCOUNT is not set."
   exit 1
 fi
 
-echo "Generating Cloudsmith OIDC token for service account: ${<<parameters.organisation>>}/${<<parameters.service_account>>}"
+echo "Generating Cloudsmith OIDC token for service account: $organisation/$service_account"
 
 RESPONSE=$(curl -X POST -H "Content-Type: application/json" \
-            -d "{\"oidc_token\":\"$CIRCLE_OIDC_TOKEN_V2\", \"service_slug\":\"${<<parameters.organisation>>}\"}" \
-            --silent --show-error "https://api.cloudsmith.io/openid/${<<parameters.service_account>>}/")
+            -d "{\"oidc_token\":\"$CIRCLE_OIDC_TOKEN_V2\", \"service_slug\":\"$organisation\"}" \
+            --silent --show-error "https://api.cloudsmith.io/openid/$service_account/")
 
 CLOUDSMITH_OIDC_TOKEN=$(echo "$RESPONSE" | grep -o '"token": "[^"]*' | grep -o '[^"]*$')
 

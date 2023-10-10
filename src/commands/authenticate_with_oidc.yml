@@ -15,3 +15,6 @@ steps:
   - run:
       name: Cloudsmith - Authenticate with OIDC
       command: <<include(scripts/authenticate_with_oidc.sh)>>
+      environment:
+        CLOUDSMITH_ORGANISATION_ENV_VAR: <<parameters.organisation>>
+        CLOUDSMITH_SERVICE_ACCOUNT_ENV_VAR: <<parameters.service_account>>
