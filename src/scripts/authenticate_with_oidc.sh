@@ -10,7 +10,7 @@ then
   exit 1
 fi
 
-if [ -z "${<<parameters.service_accoun>>}" ]
+if [ -z "${<<parameters.service_account>>}" ]
 then
   echo "Unable to generate OIDC token. Environment variable CLOUDSMITH_SERVICE_ACCOUNT is not set."
   exit 1
