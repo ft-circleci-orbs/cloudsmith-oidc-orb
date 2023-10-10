@@ -17,10 +17,9 @@ workflows:
           filters: *filters
       - orb-tools/review:
           filters: *filters
-          exclude: "RC006, RC007, RC009"
+          exclude: "RC006, RC007"
       - shellcheck/check:
           filters: *filters
-      # Triggers the next workflow in the Orb Development Kit.
       - orb-tools/publish:
           orb_name: ft-circleci-orbs/cloudsmith-oidc
           vcs_type: << pipeline.project.type >>
@@ -29,11 +28,12 @@ workflows:
             - orb-tools/review
             - orb-tools/pack
             - shellcheck/check
-          # Use a context to hold your publishing token.
+          # The context holds the CIRCLE_TOKEN for publishing
           context: circleci-orb-publishing
           filters: *filters
       # Triggers the next workflow in the Orb Development Kit.
       - orb-tools/continue:
+          config_path: .circleci/test-deploy.yml
           pipeline_number: << pipeline.number >>
           vcs_type: << pipeline.project.type >>
           orb_name: cloudsmith-oidc
