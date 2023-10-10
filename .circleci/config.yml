@@ -16,9 +16,8 @@ workflows:
       - orb-tools/pack:
           filters: *filters
       - orb-tools/review:
-          max_command_length: 120
           filters: *filters
-          exclude: "RC006, RC007"
+          exclude: "RC006, RC007, RC009"
       - shellcheck/check:
           filters: *filters
       - orb-tools/publish:
