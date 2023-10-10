@@ -9,13 +9,13 @@ usage:
       docker:
         - image: cimg/base:2023.09
       steps:
-        - checkout
-        - cloudsmith-oidc/authenticate_with_oidc:
-            organisation: "your-organisation-id"
-            service_account: "your-service-account-id"
         - run: |
-            echo "Cloudsmith Organisation: $CLOUDSMITH_ORGANISATION"
-            echo "Cloudsmith Service Account: $CLOUDSMITH_SERVICE_ACCOUNT"
+            # authenticate_with_oidc expects CLOUDSMITH_ORGANISATION and CLOUDSMITH_SERVICE_ACCOUNT environment variables
+            # usually these would be defined in project settings but can be set as follows if needed
+            # echo "export CLOUDSMITH_ORGANISATION=\"your-organisation-id\"" >> "$BASH_ENV"
+            # echo "export CLOUDSMITH_SERVICE_ACCOUNT=\"your-service-account-id\"" >> "$BASH_ENV"
+        - cloudsmith-oidc/authenticate_with_oidc:
+        - run: |
             echo "Cloudsmith OIDC token (first ten characters): ${CLOUDSMITH_OIDC_TOKEN:0:10}"
   workflows:
     main:

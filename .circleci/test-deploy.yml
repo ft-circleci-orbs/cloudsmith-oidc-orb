@@ -23,22 +23,13 @@ jobs:
     resource_class: small
     steps:
       - checkout
+      - run: |
+          echo "export CLOUDSMITH_ORGANISATION=\"financial-times\"" >> "$BASH_ENV"
+          echo "export CLOUDSMITH_SERVICE_ACCOUNT=\"circleci-orb-testing\"" >> "$BASH_ENV"
       - cloudsmith-oidc/authenticate_with_oidc:
-          organisation: "financial-times"
-          service_account: "circleci-orb-testing"
       - run:
           name: Assert environment variables have been set
           command: | 
-            if [ $CLOUDSMITH_ORGANISATION != "financial-times" ]
-            then
-              echo "Test failed: CLOUDSMITH_ORGANISATION has not been set correctly."
-              exit 1
-            fi
-            if [ $CLOUDSMITH_SERVICE_ACCOUNT != "circleci-orb-testing" ]
-            then
-              echo "Test failed: CLOUDSMITH_SERVICE_ACCOUNT has not been set."
-              exit 1
-            fi
             if [ -z $CLOUDSMITH_OIDC_TOKEN ]
             then
               echo "Test failed: CLOUDSMITH_OIDC_TOKEN has not been set."

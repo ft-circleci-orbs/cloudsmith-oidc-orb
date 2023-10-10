@@ -4,17 +4,14 @@ description:
   environment variables CLOUDSMITH_ORGANISATION, CLOUDSMITH_SERVICE_ACCOUNT and CLOUDSMITH_OIDC_TOKEN are set.
 parameters:
   organisation:
-    description: The identity/slug of the Cloudsmith organisation to use when authenticating
-    type: string
+    description: The name of environment variable containing the identity/slug of the Cloudsmith organisation to use when authenticating
+    type: env_var_name
+    default: "CLOUDSMITH_ORGANISATION"
   service_account:
-    description: The identity/slug of the Cloudsmith service account to use when authenticating
-    type: string
+    description: The name of environment variable containing the identity/slug of the Cloudsmith service account to use when authenticating
+    type: evn_var_name
+    default: "CLOUDSMITH_SERVICE_ACCOUNT"
 steps:
-  - run:
-      name: Cloudsmith - Configure organisation and service account
-      command: |
-        echo "export CLOUDSMITH_ORGANISATION=\"<<parameters.organisation>>\"" >> "$BASH_ENV"
-        echo "export CLOUDSMITH_SERVICE_ACCOUNT=\"<<parameters.service_account>>\"" >> "$BASH_ENV"
   - run:
       name: Cloudsmith - Authenticate with OIDC
       command: <<include(scripts/authenticate_with_oidc.sh)>>
