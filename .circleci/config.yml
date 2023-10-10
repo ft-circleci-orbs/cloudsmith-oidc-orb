@@ -23,6 +23,7 @@ workflows:
       - orb-tools/publish:
           orb_name: ft-circleci-orbs/cloudsmith-oidc
           vcs_type: << pipeline.project.type >>
+          pub_type: dev
           requires:
             - orb-tools/lint
             - orb-tools/review
@@ -31,7 +32,7 @@ workflows:
           # The context holds the CIRCLE_TOKEN for publishing
           context: circleci-orb-publishing
           filters: *filters
-      # Triggers the next workflow in the Orb Development Kit.
+      # Triggers the test-deploy.yml workflow.
       - orb-tools/continue:
           config_path: .circleci/test-deploy.yml
           pipeline_number: << pipeline.number >>
