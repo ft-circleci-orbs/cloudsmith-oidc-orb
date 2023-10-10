@@ -1,0 +1,18 @@
+description: >
+  Authenticate with Cloudsmith using OpenID Connect (OIDC).
+usage:
+  version: 2.1
+  orbs:
+    cloudsmith-oidc: ft-circleci-orbs/cloudsmith-oidc@1.0.0
+  jobs:
+    build:
+      docker:
+        - image: cimg/base:2023.09
+      steps:
+        - cloudsmith-oidc/authenticate_with_oidc
+        - run: |
+            echo "Cloudsmith OIDC token (first ten characters): ${CLOUDSMITH_OIDC_TOKEN:0:10}"
+  workflows:
+    main:
+      jobs:
+        - build

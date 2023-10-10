@@ -1,0 +1,22 @@
+description:
+  Authenticate with Cloudsmith using OpenID Connect (OIDC) and if successful generate a short-lived
+  OIDC token for use in subsequent requests to cloudsmith. The token is valid for up to 2 hours. On completion the
+  environment variable CLOUDSMITH_OIDC_TOKEN is set. To authenticate both a Cloudsmith organisation identity/slug and
+  a Cloudsmith service account identity/slug are required. These should be configured as CircleCI project environment variables
+  CLOUDSMITH_ORGANISATION and CLOUDSMITH_SERVICE_ACCOUNT. The names of the environment variables can be changed if required.
+parameters:
+  organisation:
+    description: The name of environment variable containing the identity/slug of the Cloudsmith organisation to use when authenticating
+    type: env_var_name
+    default: "CLOUDSMITH_ORGANISATION"
+  service_account:
+    description: The name of environment variable containing the identity/slug of the Cloudsmith service account to use when authenticating
+    type: env_var_name
+    default: "CLOUDSMITH_SERVICE_ACCOUNT"
+steps:
+  - run:
+      name: Cloudsmith - Authenticate with OIDC
+      command: <<include(scripts/authenticate_with_oidc.sh)>>
+      environment:
+        CLOUDSMITH_ORGANISATION_ENV_VAR: <<parameters.organisation>>
+        CLOUDSMITH_SERVICE_ACCOUNT_ENV_VAR: <<parameters.service_account>>
