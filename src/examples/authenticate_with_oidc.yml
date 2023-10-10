@@ -9,7 +9,7 @@ usage:
       docker:
         - image: cimg/base:2023.09
       steps:
-        - cloudsmith-oidc/authenticate_with_oidc:
+        - cloudsmith-oidc/authenticate_with_oidc
         - run: |
             echo "Cloudsmith OIDC token (first ten characters): ${CLOUDSMITH_OIDC_TOKEN:0:10}"
   workflows:
