@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# shellcheck disable=SC2296
+
 set +e
 
 if [ -z "${<<parameters.organisation>>}" ]
