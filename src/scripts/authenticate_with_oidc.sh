@@ -23,7 +23,7 @@ RESPONSE=$(curl -X POST -H "Content-Type: application/json" \
             -d "{\"oidc_token\":\"$CIRCLE_OIDC_TOKEN_V2\", \"service_slug\":\"$service_account\"}" \
             --silent --show-error "https://api.cloudsmith.io/openid/$organisation/")
 
-CLOUDSMITH_OIDC_TOKEN=$(echo "$RESPONSE" | grep -o '"token":"[^"]*' | grep -o '[^"]*$')
+CLOUDSMITH_OIDC_TOKEN=$(echo "$RESPONSE" | grep -o '"token"\s*:\s*"[^"]*' | grep -o '[^"]*$')
 
 if [ -z "$CLOUDSMITH_OIDC_TOKEN" ]
 then
