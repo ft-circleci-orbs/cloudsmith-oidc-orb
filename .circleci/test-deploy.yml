@@ -23,7 +23,7 @@ jobs:
     resource_class: small
     steps:
       - checkout
-      - cloudsmith-oidc-test/authenticate_with_oidc
+      - cloudsmith-oidc/authenticate_with_oidc
       - run:
           name: Assert environment variables have been set
           command: | 
