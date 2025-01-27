@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   orb-tools: circleci/orb-tools@12.0
   cloudsmith-oidc-test: ft-circleci-orbs/cloudsmith-oidc@1.0.0
-  # The orb definition is intentionally not included here. It will be injected into the pipeline. Test
+  # The orb definition is intentionally not included here. It will be injected into the pipeline. Test me
   cloudsmith-oidc: {}
 
 # Filter for tests
